@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Message;
 
 class PagesController extends Controller
 {
@@ -35,9 +36,11 @@ class PagesController extends Controller
     }
 
     //Rutas laratter
-    public function home(){
+    public function welcome(){
         
-        $messages = [
+
+        $messages = Message::all();
+        /*$messages = [
             [
                 'id' => 1,
                 'content' => 'Primer mensaje',
@@ -58,11 +61,11 @@ class PagesController extends Controller
                 'content' => 'Cuarto mensaje',
                 'image' => 'http://lorempixel.com/600/388?4'
             ],
-        ];
+        ];*/
         
         return view('welcome', [
                 "messages" => $messages,
-                "teacher" => "Virgilio Padron Batun",
+                
         ]);
 
 

@@ -12,7 +12,7 @@
 */
 
 //Rutas para pruebas
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@welcome');
 
 
 Route::get('/about', 'PagesController@about');
@@ -21,3 +21,8 @@ Route::get('/about', 'PagesController@about');
 //Rutas laratter
 Route::get('/index', 'PagesController@index');
 
+
+//Ruta para crear pagina con un message particular resiviendo el id.
+Route::get('/messages/{message}', 'MessagesController@show');
+
+Route::post('/messages/create', 'MessagesController@create');
