@@ -38,8 +38,10 @@ class PagesController extends Controller
     //Rutas laratter
     public function welcome(){
         
-
-        $messages = Message::all();
+        //Paginate nos servira para hacer la paginacion de los mensajes
+        //Para no mostrar tantos mensajes en un vista
+        //Si queremos todo usamos all()
+        $messages = Message::paginate(10);
         /*$messages = [
             [
                 'id' => 1,

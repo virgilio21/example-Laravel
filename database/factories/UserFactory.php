@@ -25,3 +25,15 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+
+//Crear este factory nos permite luego agregar datos a la base de datos de manera aletoria para ingresar datos a la base de datos y ver como se comporta.
+//Necesitamos hacer algo mas en un archivo llamado /database/seeds/databaseSeeder.php.
+$factory->define(App\Message::class, function(Faker $faker){
+
+    //Dentro de realText determinamos el largo de la cadena, que se contruye con partes del libro alicia en el pais de las maravillas
+    return [
+        'content'=>$faker->realText(random_int(20,160)),
+        'image'=>$faker->imageUrl(600,388),
+    ];
+});

@@ -61,6 +61,14 @@
             
         @endforelse
 
+        <!--Si aun hay mensajes se crearan otras paginas y laravel agregara un parametro a las rutas-->
+
+        @if(count($messages))
+            <div class="mt-2 mx-auto">
+                {{$messages->links()}}
+            </div>
+        @endif
+
             
 
         
