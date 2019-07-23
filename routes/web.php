@@ -26,3 +26,8 @@ Route::get('/index', 'PagesController@index');
 Route::get('/messages/{message}', 'MessagesController@show');
 
 Route::post('/messages/create', 'MessagesController@create');
+
+//Rutas de autenticacion
+Auth::routes();
+
+
