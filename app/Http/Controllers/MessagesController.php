@@ -24,10 +24,14 @@ class MessagesController extends Controller
 
     public function create(CreateMessageRequest $request){
 
+
+        $user = $request->user();
+
        $message = Message::create([
            //El key es el nombre de la columna en la base de datos
            'content'=>$request->input('message'),
-           'image'=>'http://lorempixel.com/600/388?1'.mt_rand(0,1000)
+           'image'=>'http://lorempixel.com/600/388?1'.mt_rand(0,1000),
+           'user_id'=> $user->id
        ]);
 
        return redirect('/messages/'.$message->id);

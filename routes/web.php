@@ -25,7 +25,9 @@ Route::get('/index', 'PagesController@index');
 //Ruta para crear pagina con un message particular resiviendo el id.
 Route::get('/messages/{message}', 'MessagesController@show');
 
-Route::post('/messages/create', 'MessagesController@create');
+//Ruta que crea el mensaje
+//Necesitamos un middleware que nos permita proteger esta ruta para que solo usuarios logueados la puedan usar. Para eso usamos el middleware auth.
+Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 
 //Rutas de autenticacion
 Auth::routes();

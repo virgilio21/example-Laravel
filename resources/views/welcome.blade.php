@@ -50,9 +50,7 @@
             <div class="col-6">
                 
                 <!--Tambien podemos acceder a estas propiedades como $message['nombrePropiedad']-->
-                <img  class="img-thumbnail" src="{{$message['image']}}" alt="imagen ramdon o eso parece">
-                <p class="card-text">{{$message['content']}} <a href="/messages/{{$message['id']}}">Ver maś</a>
-                </p>
+                @include('messages.message')
                 
 
             </div>
@@ -63,16 +61,20 @@
 
         <!--Si aun hay mensajes se crearan otras paginas y laravel agregara un parametro a las rutas-->
 
-        @if(count($messages))
-            <div class="mt-2 mx-auto">
-                {{$messages->links()}}
-            </div>
-        @endif
+        
 
             
 
         
      
         
+    </div>
+
+    <div class="row">
+        @if(count($messages))
+            <div class="mt-2 mx-auto">
+                {{$messages->links()}}
+            </div>
+        @endif
     </div>
 @endsection

@@ -11,8 +11,7 @@
         <div class="col-12">
             
             <p class="card-text">id:{{$message->id}}</p>
-            <img class="img-thumbnail" src="{{$message->image}}" alt="Imagen ramdom">
-            <p class="card-text">{{$message->content}}</p>
+            @include('messages.message')
             <small>{{$message->created_at}}</small>
         </div>
     </div>   
