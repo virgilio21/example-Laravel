@@ -3,3 +3,6 @@
 <div class="text-muted">Escrito por <a href="{{$message->user->username}}">{{$message->user->username}}<a/></div>    
 <p class="card-text">{{$message['content']}} <a href="/messages/{{$message['id']}}">Ver maś</a>
 </p>
+<div class="text-muted card-text">
+    {{$message->created_at}}
+</div>

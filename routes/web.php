@@ -32,4 +32,7 @@ Route::post('/messages/create', 'MessagesController@create')->middleware('auth')
 //Rutas de autenticacion
 Auth::routes();
 
+//Ruta para ver los mensajes del usuario
+Route::get('/{username}', 'UsersController@show');
+
 

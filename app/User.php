@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function messages(){
+
+        //Le indicamos que muchos mensajes contienen o tienen su id de usuario.
+        //Vas a retornar muchos mensajes que contienen tu id, de forma ordenada por fecha de creacion de manera desendente.
+        return $this->hasMany(Message::class)->orderBy('created_at','desc');
+    }
 }
