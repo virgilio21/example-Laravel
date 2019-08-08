@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,23 @@ Route::post('/messages/create', 'MessagesController@create')->middleware('auth')
 
 //Rutas de autenticacion
 Auth::routes();
+//Rutas facebook
+Route::get('/auth/facebook', 'SocialAuthController@facebook');
+Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
+
 
 //Ruta para ver los mensajes del usuario
 Route::get('/{username}', 'UsersController@show');
 
+//Ruta para ver usuarios que sigues
+Route::get('/{username}/follows', 'UsersController@follows');
+
+//Ruta para seguir a un usuario
+Route::post('/{username}/follow', 'UsersController@follow');
+
+//Ruta para dejar de seguir a un usuario
+Route::post('/{username}/unfollow','UsersController@unFollow');
+
+//Ruta para ver quienes te siguen.
+Route::get('/{username}/followers', 'UsersController@followers');
 

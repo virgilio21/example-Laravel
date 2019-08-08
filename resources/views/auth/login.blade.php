@@ -66,6 +66,12 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="row">
+                    <a href="/auth/facebook" class="btn btn-danger">
+                        Login con facebook
+                    </a>
+                </div>
             </div>
         </div>
     </div>
