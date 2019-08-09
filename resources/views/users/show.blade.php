@@ -8,6 +8,19 @@
 <a href="/{{$user->username}}/followers" class="btn btn-link">Seguidores <span class="badge badge-default">{{$user->followers->count()}}</span></a>
 
 @if(Auth::check())
+
+    <!--Llave y usuario al que le queremos pasar el mensaje privado, en este caso esta guardado en la variable user.-->
+    @if(Gate::allows('dms', $user))
+    <form action="/{{ $user->username}}/dms" method="POST" class="mb-2">
+        <input type="text" name="message" class="form-control mb-1">
+        <button class="btn btn-dark">
+            Enviar DM
+        </button>
+    </form>
+
+    @endif
+
+
     @if(Auth::user()->isFollowing($user))
 
         <form action="/{{$user->username}}/unfollow" method="POST">

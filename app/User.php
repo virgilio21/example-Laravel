@@ -61,4 +61,9 @@ class User extends Authenticatable
         //Le pedimos a los usuarios que seguimos y verificamos si contiene al usuario que vamos a seguir, contains devulve true o false.
         return $this->follows->contains($user);
     }
+
+    public function socialProfiles(){
+     //Un usuario tiene muchos perfiles, pero un perfil pertecene a solo un usuario, uno a muchos 
+     return $this->hasMany(SocialProfile::class);  
+    }
 }

@@ -35,6 +35,8 @@ Auth::routes();
 //Rutas facebook
 Route::get('/auth/facebook', 'SocialAuthController@facebook');
 Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
+//Ruta para registrar en facebook
+Route::post('/auth/facebook/register', 'SocialAuthController@register');
 
 
 //Ruta para ver los mensajes del usuario
