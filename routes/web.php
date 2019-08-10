@@ -23,7 +23,7 @@ Route::get('/about', 'PagesController@about');
 Route::get('/index', 'PagesController@index');
 
 
-//Ruta para crear pagina con un message particular resiviendo el id.
+//Ruta para crear pagina con un message particular resiviendo el id, detaller del mensaje.
 Route::get('/messages/{message}', 'MessagesController@show');
 
 //Ruta que crea el mensaje
@@ -45,12 +45,25 @@ Route::get('/{username}', 'UsersController@show');
 //Ruta para ver usuarios que sigues
 Route::get('/{username}/follows', 'UsersController@follows');
 
-//Ruta para seguir a un usuario
-Route::post('/{username}/follow', 'UsersController@follow');
-
-//Ruta para dejar de seguir a un usuario
-Route::post('/{username}/unfollow','UsersController@unFollow');
 
 //Ruta para ver quienes te siguen.
 Route::get('/{username}/followers', 'UsersController@followers');
 
+
+//Agrupar rutas para definir prefigos o middlewers para usar en esas rutas
+
+Route::group(['middleware' => 'auth'], function(){
+
+    //Ruta para seguir a un usuario
+    Route::post('/{username}/follow', 'UsersController@follow');
+
+    //Ruta para dejar de seguir a un usuario
+    Route::post('/{username}/unfollow','UsersController@unFollow');
+
+    Route::post('/{username}/dms','UsersController@sendPrivateMessage');
+
+    //Ruta para ver la conversacion pasandole el conversation id.
+    Route::get('/conversations/{conversation}', 'UsersController@showConversation');
+
+
+});

@@ -12,6 +12,7 @@
     <!--Llave y usuario al que le queremos pasar el mensaje privado, en este caso esta guardado en la variable user.-->
     @if(Gate::allows('dms', $user))
     <form action="/{{ $user->username}}/dms" method="POST" class="mb-2">
+        {{csrf_field()}}
         <input type="text" name="message" class="form-control mb-1">
         <button class="btn btn-dark">
             Enviar DM
