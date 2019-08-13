@@ -12,23 +12,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//IMPORTANTE ******* Las rutas ordenarlas con de manera logica la ruta que trabajan con una tabla similar o clase poenerlas juntas, ya que Laravel puede no interpretar bien las rutas.
+
 //Rutas para pruebas
 Route::get('/', 'PagesController@welcome');
-
-
 Route::get('/about', 'PagesController@about');
-
-
 //Rutas laratter
 Route::get('/index', 'PagesController@index');
 
 
 //Ruta para crear pagina con un message particular resiviendo el id, detaller del mensaje.
 Route::get('/messages/{message}', 'MessagesController@show');
-
 //Ruta que crea el mensaje
 //Necesitamos un middleware que nos permita proteger esta ruta para que solo usuarios logueados la puedan usar. Para eso usamos el middleware auth.
 Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
+//Busqueda de mensajes
+Route::get('/messages', 'MessagesController@search');
+
+
 
 //Rutas de autenticacion
 Auth::routes();
@@ -39,15 +40,15 @@ Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
 Route::post('/auth/facebook/register', 'SocialAuthController@register');
 
 
+
 //Ruta para ver los mensajes del usuario
 Route::get('/{username}', 'UsersController@show');
-
 //Ruta para ver usuarios que sigues
 Route::get('/{username}/follows', 'UsersController@follows');
-
-
 //Ruta para ver quienes te siguen.
 Route::get('/{username}/followers', 'UsersController@followers');
+
+
 
 
 //Agrupar rutas para definir prefigos o middlewers para usar en esas rutas

@@ -33,7 +33,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li>
 
+                            <form action="/messages">
+                               
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="query" placeholder="¿ Que mensaje quieres buscar ?" required>
+                                        
+                                            <button class="btn btn-outline-success">
+                                                Buscar
+                                            </button>
+                                </div>
+                            
+                            </form>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

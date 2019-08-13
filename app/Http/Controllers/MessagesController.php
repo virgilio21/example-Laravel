@@ -26,14 +26,32 @@ class MessagesController extends Controller
 
 
         $user = $request->user();
+        //Cuando son archivos en el input no se usa el metodo input, en vez de eso usamos file.
+        $image = $request->file('image');
 
        $message = Message::create([
            //El key es el nombre de la columna en la base de datos
-           'content'=>$request->input('message'),
-           'image'=>'http://lorempixel.com/600/388?1'.mt_rand(0,1000),
-           'user_id'=> $user->id
+           'content' => $request->input('message'),
+           //Hay que guardar la imagen en algun lugar en este caso en una carpetas messages dentro de storage public, para eso se usa el comando php artisan storage:link para vincular la carpeta storage public a la carptea public, es un link sombolico :D.
+           //Nos devuelve un nombre al azar para emitar nombres repetidos.
+           'image' => $image->store('messages', 'public'),
+           'user_id' => $user->id
        ]);
 
        return redirect('/messages/'.$message->id);
+    }
+
+    public function search( Request $request ){
+
+        $query = $request->input('query');
+
+        //Le doy el nombre de la columna el operador en este caso like, lo que busco es que el contenido que me trae el request este en algun mensaje aunque no sea el contenido completo y por el ultimo el valor que va a buscar
+        $messages = Message::where( 'content', 'LIKE', "%$query%" )->get();
+        //Esto traera mas de un mensaje si se encuentran
+
+        return view('messages.index', [
+            'messages' => $messages
+        ]);
+    
     }
 }

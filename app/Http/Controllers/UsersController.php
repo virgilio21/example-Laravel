@@ -13,6 +13,8 @@ class UsersController extends Controller
     public function show($username){
 
         //Guardamos el usuario, buscandolo por username, el primer parametro es el nombre de la columna el segundo es el valor de esa columna. Ponemos la funcion first, por que cuando encuentre la primera coincidencia queremos que para, ya que username es un valor unico no debera repetirse
+
+        //Simular una excepcion  asi     throw new \Exception("Simulando un error");
         $user = $this->findByUsername($username);
 
         return view('users.show', [
@@ -52,7 +54,12 @@ class UsersController extends Controller
     //Buscar al usuario por medio de su username
     private function findByUsername($username){
 
-        return $user = User::where('username', $username)->first();
+        //Usar first no nos ayuda a contralar la excepcion con un error 404, debemos utilizar firstOrFail();
+
+        //return $user = User::where('username', $username)->first();
+        //El metodo failOrFail simpre devuelve un usuario si lo encuentra y si no, devuelve una excepcion del tipo not found 404.
+        return $user = User::where('username', $username)->firstOrFail();
+ 
     }
 
     //dejar de seguir a alguien
@@ -92,9 +99,12 @@ class UsersController extends Controller
 
         $message = $request->input('message');
 
-        $conversation = Conversation::create();
+        $conversation = Conversation::between($me, $user);
+
+        //Esta parte ya no es necesaria despues de crear el metodo between en conversation.
+        /*$conversation = Conversation::create();
         $conversation->users()->attach($me);
-        $conversation->users()->attach($user);
+        $conversation->users()->attach($user);*/
 
 
         $privateMessage = PrivateMessage::create([

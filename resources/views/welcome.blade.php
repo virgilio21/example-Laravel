@@ -18,8 +18,8 @@
 
     <div class="row">
 
-
-        <form action="/messages/create" method="POST">
+        <!--Siempre agrgar el atributo enctype a un form que maneja archivo de cualquier tipo-->
+        <form action="/messages/create" method="POST" enctype="multipart/form-data">
             
             <!--La line incrustada en el atributo class no se por que no funciona-->
             <div class="form-group @if ($errors->has('message')) has-danger @endif ">
@@ -35,6 +35,8 @@
                         <div class="form-control-feedback" >{{$error}}</div>    
                     @endforeach
                 @endif
+
+                <input type="file" class="form-control-file" name="image">
             </div>
         
         </form>
