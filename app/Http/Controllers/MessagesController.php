@@ -45,13 +45,30 @@ class MessagesController extends Controller
 
         $query = $request->input('query');
 
-        //Le doy el nombre de la columna el operador en este caso like, lo que busco es que el contenido que me trae el request este en algun mensaje aunque no sea el contenido completo y por el ultimo el valor que va a buscar
-        $messages = Message::where( 'content', 'LIKE', "%$query%" )->get();
+        //Le doy el nombre de la columna el operador en este caso like, lo que busco es que el contenido que me trae el request este en algun mensaje aunque no sea el contenido completo y por el ultimo el valor que va a buscar.
+
+        //Sin Laravel Scout
+        /*$messages = Message::with('user')->where( 'content', 'LIKE', "%$query%" )->get();*/
+
+
         //Esto traera mas de un mensaje si se encuentran
+
+        //Con Laravel Scout
+        //get() trae todas las coincidencias
+        $messages = Message::search($query)->get();
+
+        $messages->load('user');
 
         return view('messages.index', [
             'messages' => $messages
         ]);
-    
+            
+        //Usando with agilisamos la query, pasamos de cientas de consultas a tan solo dos,
+        //Agilizamos la traida de datos del usuario ya que nos servira para la vista.
+
+
+
+        //el with es cuando armas una query
+        //Y el load cuando ya tienes una query ejecutada
     }
 }
